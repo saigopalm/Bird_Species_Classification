@@ -26,6 +26,8 @@ To begin with two standard architectures, ResNet-18 and ResNet-50 pretrained on 
 - This eliminates irrelavant background and enhancing the model's focus on object of interest - bird.
 - After cropping, the image was resized and normalized using standard ImageNet statistics.
 
+Loss and accuracy plots have been saved in the Plots folder.
+
 ### Hyperparameters
 The following hyperparameters were selected based on standard practices for fine-tuning pretrained convolutional neural networks and empirical evaluation on the validation set.
 
@@ -45,3 +47,15 @@ The following hyperparameters were selected based on standard practices for fine
 | ResNet-18     |    11M     | Full Image       | 66.3%               |
 | ResNet-18     |    11M     | Cropped (BBox)   | 68.5%               |
 | ResNet-50     |    27M     |  Full Image      | **79.6%**           |
+
+### Results (on test data)
+- Overall_accuracy (%): 76.13048
+- max_accuracy_class: 133
+- max_accuracy (%): 100.0
+- min_accuracy_class: 101
+- min_accuracy (%)': 16.66667
+Predictions made by ResNet50 (which was submitted) are stored in pred.csv
+
+### Conclusion
+The highest validation accuracy of 79.6% was achieved using ResNet-50. The test set performance (76.13%) closely aligned with validation accuracy, suggesting good generalization. Unlike standard image classification tasks where inter-class differences are often large and easily separable (between a bird and a dog), fine-grained visual classification requires distinguishing between categories that exhibit high inter-class similarity and low intra-class variability. In such scenarios, the model must go beyond extracting low-level features (edges, color blobs, basic shapes) and instead learn to identify subtle, localized, and discriminative patterns. 
+Moreover, each class in this dataset contains only ~30 images, which is insufficient to train a deep network from scratch. To address this, transfer learning was employed using pretrained models (ResNet-18 and ResNet-50) as feature extractors, using the representations learned from the large ImageNet dataset. While this approach significantly improves convergence and generalization, the limited data and use of relatively standard architectures still constrain the model's ability to fully capture the distinctions required for fine-grained classification, resulting in only moderate performance.
