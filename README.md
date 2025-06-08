@@ -19,3 +19,16 @@ A custom Dataset class was implemented to handle image loading and preprocessing
 - Images were resized to 224×224 pixels.
 - A random horizontal flip was applied with a probability of 0.5 to introduce basic data augmentation.
 - Images were then converted to PyTorch tensors and normalized. 
+
+### Model Selection and Training
+To begin with two standard architectures, ResNet-18 and ResNet-50 pretrained on ImageNet dataset were adopted. The final fully connected layer of each network was modified to output logits over 200 classes. An important aspect of the given dataset is that each image contains exactly one bird, and bounding box coordinates for each instance are provided. To exploit this,
+- Each image was tightly cropped using the bounding box coordinates.
+- This eliminates irrelavant background and enhancing the model's focus on object of interest - bird.
+- After cropping, the image was resized and normalized using standard ImageNet statistics.
+
+### Results (on Validation Set)
+| Model         | Parameters |  Image Input     | Validation Accuracy |
+|---------------|------------|------------------|---------------------|
+| ResNet-18     |    11M     | Full Image       | 66.3%               |
+| ResNet-18     |    11M     | Cropped (BBox)   | 68.5%               |
+| ResNet-50     |    27M     |  Full Image      | **79.6%**           |
