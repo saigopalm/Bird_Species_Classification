@@ -54,6 +54,7 @@ The following hyperparameters were selected based on standard practices for fine
 - max_accuracy (%): 100.0
 - min_accuracy_class: 101
 - min_accuracy (%)': 16.66667
+  
 Predictions made by ResNet50 (which was submitted) are stored in pred.csv
 
 ### Conclusion
