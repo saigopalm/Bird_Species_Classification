@@ -26,6 +26,19 @@ To begin with two standard architectures, ResNet-18 and ResNet-50 pretrained on 
 - This eliminates irrelavant background and enhancing the model's focus on object of interest - bird.
 - After cropping, the image was resized and normalized using standard ImageNet statistics.
 
+### Hyperparameters
+The following hyperparameters were selected based on standard practices for fine-tuning pretrained convolutional neural networks and empirical evaluation on the validation set.
+
+| Hyperparameter           | Value                   | Description                                                             |
+|--------------------------|--------------------------|-------------------------------------------------------------------------|
+| Optimizer                | SGD                      | Stochastic Gradient Descent optimizer used for training                 |
+| Learning Rate            | 0.01                     | Initial learning rate                                                   |
+| Momentum                 | 0.9                      | Helps accelerate gradient updates and dampens oscillations              |
+| LR Scheduler             | ReduceLROnPlateau        | Reduces the learning rate when a metric has stopped improving           |
+| Loss Function            | CrossEntropyLoss         | Suitable for multi-class classification tasks                           |
+| Batch Size               | 32                       | Number of samples processed before the model is updated                 |
+
+
 ### Results (on Validation Set)
 | Model         | Parameters |  Image Input     | Validation Accuracy |
 |---------------|------------|------------------|---------------------|
